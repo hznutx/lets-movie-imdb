@@ -19,13 +19,15 @@ const MovieCard = ({ movie }: { movie: MoviesIMDB }) => {
       <div className="p-6 grid group">
         <Link
           href={`${movie.link}`}
-          className="group-hover:text-cyan-700 font-bold text-2xl h-16 line-clamp-2"
+          className="group-hover:text-cyan-700 font-bold sm:text-2xl sm:h-16 line-clamp-2"
         >
           {movie.title}
         </Link>
-        <span className="text-slate-400  font-semibold">({movie.year})</span>
+        <span className="text-slate-400 text-xs sm:text-base font-semibold">
+          ({movie.year})
+        </span>
         <div className="h-28">
-          <span className="line-clamp-4 py-2 leading-relaxed">
+          <span className="line-clamp-4 py-2 text-xs sm:text-base leading-relaxed">
             {movie.description}
           </span>
         </div>
@@ -43,7 +45,7 @@ const MovieCard = ({ movie }: { movie: MoviesIMDB }) => {
             </span>
           </div>
           <div className="flex flex-col items-end">
-            <div className="h-7"/>
+            <div className="h-7" />
             <span className="text-3xl  font-bold  gap-x-2 text-slate-300">
               #{movie.rank}
             </span>
