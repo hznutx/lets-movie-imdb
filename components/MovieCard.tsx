@@ -6,16 +6,13 @@ import { icon } from "../constants/images";
 const MovieCard = ({ movie }: { movie: MoviesIMDB }) => {
   return (
     <div className="card grid rounded-3xl max-w-xs sm:max-w-[390px] shadow-sm bg-slate-100  flex-col">
-      <div className="justify-center overflow-clip h-60">
         <Image
           src={movie.images[2][1]}
           width={390}
           height={200}
-          className="rounded-t-3xl grid "
+          className="rounded-t-3xl objects-top grid h-80 object-cover"
           alt={movie.title}
         />
-      </div>
-
       <div className="p-6 grid group">
         <Link
           href={`${movie.link}`}

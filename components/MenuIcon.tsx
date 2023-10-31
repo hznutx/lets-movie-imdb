@@ -8,12 +8,12 @@ export const MenuIcon = () => {
     };
 
   return (
-    <div className="flex">
-      <div className="text-white self-center text-4xl z-30 cursor-pointer" onClick={handleMenuIconClick}>
+    <div className="relative">
+      <div className="text-white self-center absolute right-2 top-0 text-4xl z-50 cursor-pointer" onClick={handleMenuIconClick}>
         #
       </div>
       {openMenu && (
-        <div className="inset-0 overflow-hidden top-0 fixed bg-slate-900 items-center z-20"></div>
+        <div className="fixed inset-0 overflow-hidden top-0 bg-slate-900 items-center z-100"></div>
       )}
     </div>
   );

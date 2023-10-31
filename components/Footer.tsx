@@ -1,4 +1,4 @@
-import { COPYRIGHT } from "@/constants/main"
+import { COPYRIGHT } from "@/constants";
 
 const Footer = () => {
   return (
@@ -6,5 +6,5 @@ const Footer = () => {
       {COPYRIGHT}
     </div>
   );
-}
-export default Footer
+};
+export default Footer;

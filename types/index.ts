@@ -13,6 +13,11 @@ export interface MoviesIMDB {
   link?: string;
 }
 
-export interface CardProps {
-  data?: MoviesIMDB[];
+export interface PromptFilter {
+  category: string;
+  setCategory: (category: string) => void;
+}
+
+export interface SearchTopRank {
+  searchParams: MoviesIMDB;
 }
