@@ -1,13 +1,18 @@
 "use client";
-import { genre } from "@/constants";
+import DropdownButton from "./SearchDropDown";
+import { DropDownList, FilterSearchInput, MoviesIMDB } from "@/types";
+import { SearchBar } from ".";
+import { useState } from "react";
 
-export const SearchFilter = () => {
+export const SearchFilter = ( {movietype,rank,rating}:DropDownList ) => {
+  
+
   return (
-    <div className="flex rounded-full bg-slate-800 p-1">
-      <div className="my-20 max-w-6xl z-20 absolute flex-row overflow-x-hidden">
-        <div className="flex-wrap flex">
-          
-        </div>
+    <div className="w-full flex-col">
+      <div className="mt-2 grid sm:grid-cols-3 gap-6">
+        <DropdownButton data={movietype} />
+        <DropdownButton data={rank}/>
+        <DropdownButton data={rating}/>
       </div>
     </div>
   );

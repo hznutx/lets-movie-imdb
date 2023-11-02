@@ -1,48 +1,37 @@
-"use client"
+"use client";
 import { icon } from "@/constants/images";
-import { handleSearch } from "@/utils/search";
-import Image from "next/image";
+import { FilterSearchInput } from "@/types";
+import { IconImg } from "./ImageSet";
 import { useState } from "react";
-import DropdownButton from "./SearchQuery";
 
-const SearchBar = () => {
-  const [filterClick, setFilterClick] = useState(false);
-  const [movie, setMovie] = useState("");
+const SearchBar = ({ onClick, keyword, onChange }: FilterSearchInput) => {
+   const [openDropDown, setOpenDropDown] = useState(false);
 
-  const handlePopup = () => {
-    setFilterClick((prev) => !prev);
-  };
-
+   const handlePopup = () => {
+     setOpenDropDown((prev) => !prev);
+   };
+  
+  
   return (
-    <form onSubmit={handleSearch} className="w-full mb-32">
-      <div className="flex rounded-full bg-slate-800 px-2">
-        <Image
-          src={icon.filter}
-          width={30}
-          height={30}
-          onClick={handlePopup}
-          className="rounded-full m-2 cursor-pointer"
-          alt="search"
-        />
-
+    <form itemType="submit" className="w-full mb-5">
+      <div className="flex rounded-full bg-[#0d1829] px-2">
+        <IconImg from={icon.filter} size={30} onClick={handlePopup} />
         <input
           type="text"
-          name="movie"
-          value={movie}
-          className="w-full flex bg-transparent pl-2 text-slate-500 font-light outline-0"
+          value={keyword}
+          onChange={(e: any) => {
+            onChange(e.target.value);
+          }}
+          className="w-full bg-[#0d1829] flex bg-transparent pl-2 text-[#cccccc] outline-0"
           placeholder="Search name movie or select options"
         />
-        <button type="submit" className="relative p-2 rounded-full">
-          <Image
-            src={icon.search}
-            width={30}
-            className="rounded-full"
-            height={30}
-            alt="find"
-          />
+        <button
+          type="submit"
+          className="relative p-2 bg-[#0d1829] rounded-full"
+        >
+          <IconImg from={icon.search} size={30} />
         </button>
       </div>
-      {filterClick && <DropdownButton />}
     </form>
   );
 };

@@ -1,17 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
 import { MoviesIMDB } from "@/types";
-import { MovieCard } from ".";
+import { MovieCard, SearchBar } from ".";
 import {
   calculateNextFetchTime,
   fetchAndSaveData,
   getStoredData,
 } from "@/utils";
-import { HEADER_TOPMOVIE, genre } from "@/constants";
-import SearchBar from "./SearchBar";
+import { HEADER_TOPMOVIE } from "@/constants";
+import { SearchFilter } from "./SearchFilter";
+import PageLayout from "./Pagination";
+import Pagination from "./Pagination";
 
 const TopRankMovies = () => {
   const [movies, setMovies] = useState<MoviesIMDB[]>([]);
+  const [searchInput, setsearchInput] = useState("");
+  const [openDropDown, setOpenDropDown] = useState(false);
+
   async function fetchMovies() {
     const storedData = getStoredData();
 
@@ -24,6 +29,10 @@ const TopRankMovies = () => {
       }
     }
   }
+
+  const handlePopup = () => {
+    setOpenDropDown((prev) => !prev);
+  };
 
   useEffect(() => {
     fetchMovies();
@@ -39,19 +48,37 @@ const TopRankMovies = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const searchMovies = movies.filter((movie) => {
+    return movie.title.includes(searchInput);
+  });
+
+  const isDataEmpty =
+    !Array.isArray(searchMovies) || searchMovies.length < 1 || !searchMovies;
+const NumResultMovies = searchMovies.length;
+
   return (
-    <div className="flex-col py-8 gap-y-10 flex items-center">
-      <SearchBar />
-      <span className="sm:text-5xl font-extrabold text-center text-white">
-        {HEADER_TOPMOVIE}
-      </span>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-        {movies.map((movie, i) => (
-          <div key={i}>
-            <MovieCard movie={movie} />
+    <div className="flex-col py-8 gap-y-12 flex items-center">
+      <SearchBar
+        keyword={searchInput}
+        onClick={handlePopup}
+        onChange={setsearchInput}
+      />
+      {!isDataEmpty ? (
+        <div className="gap-y-12 flex items-center flex-col w-full">
+          <p className="sm:text-5xl font-extrabold text-center text-white">
+            {NumResultMovies !== 100 ? (
+              <span>Found {NumResultMovies} movies result</span>
+            ) : (
+              <span>{HEADER_TOPMOVIE}</span>
+            )}
+          </p>
+            <Pagination moviecard={searchMovies}/>
           </div>
-        ))}
-      </div>
+      ) : (
+        <span className="w-full text-center text-lg text-white">
+          Sorry but nothing match 🙁 recheck movie name again
+        </span>
+      )}
     </div>
   );
 };

@@ -1,4 +1,7 @@
+import { MouseEventHandler } from "react";
+
 export interface MoviesIMDB {
+  searchKeyword?: any;
   key?: string | number | bigint | null | undefined;
   rank?: string;
   title: string;
@@ -13,11 +16,34 @@ export interface MoviesIMDB {
   link?: string;
 }
 
-export interface PromptFilter {
-  category: string;
-  setCategory: (category: string) => void;
+export interface FilterSearchInput {
+  onClick?: MouseEventHandler<HTMLImageElement>;
+  onChange?: any;
+  data?: string[];
+  keyword?: string | number | readonly string[] | undefined;
 }
 
-export interface SearchTopRank {
-  searchParams: MoviesIMDB;
+export type DropDownList = {
+  movietype?:any;
+  rating?:any ;
+  rank?: any;
+};
+
+export interface img {
+  from: string;
+  onClick?: MouseEventHandler<HTMLImageElement>;
+  w?: number;
+  h?: number;
+  theme?: string;
+  size?: number;
+  alt?: string;
+  link?: string;
+}
+
+export interface IMoviesContext {
+  movies?: React.Dispatch<React.SetStateAction<MoviesIMDB[]>>;
+  setMovies?: React.Dispatch<React.SetStateAction<MoviesIMDB[]>>;
+  searchInput?: string;
+  setSearchInput?: React.Dispatch<React.SetStateAction<string>>;
+  searchMovies?: any;
 }

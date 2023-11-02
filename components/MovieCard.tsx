@@ -1,18 +1,12 @@
 import { MoviesIMDB } from "@/types";
-import Image from "next/image";
 import Link from "next/link";
 import { icon } from "../constants/images";
+import { IconImg, MoviePoster } from "./ImageSet";
 
 const MovieCard = ({ movie }: { movie: MoviesIMDB }) => {
   return (
     <div className="card grid rounded-3xl max-w-xs sm:max-w-[390px] shadow-sm bg-slate-100  flex-col">
-        <Image
-          src={movie.images[2][1]}
-          width={390}
-          height={200}
-          className="rounded-t-3xl objects-top grid h-80 object-cover"
-          alt={movie.title}
-        />
+      <MoviePoster from={movie.images[2][1]} />
       <div className="p-6 grid group">
         <Link
           href={`${movie.link}`}
@@ -33,12 +27,7 @@ const MovieCard = ({ movie }: { movie: MoviesIMDB }) => {
             <span className="text-yellow-500 text-xl">IMDB SCORE</span>
             <span className="text-3xl flex gap-x-1 group-hover:text-yellow-600">
               {movie.rating}
-              <Image
-                src={icon.rating}
-                alt="{movie.rating}"
-                width={24}
-                height={24}
-              />
+              <IconImg from={icon.rating} alt="{movie.rating}" size={24} />
             </span>
           </div>
           <div className="flex flex-col items-end">
