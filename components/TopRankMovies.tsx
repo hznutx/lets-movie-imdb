@@ -75,8 +75,8 @@ const NumResultMovies = searchMovies.length;
             <Pagination moviecard={searchMovies}/>
           </div>
       ) : (
-        <span className="w-full text-center text-lg text-white">
-          Sorry but nothing match 🙁 recheck movie name again
+        <span className="w-full text-center text-lg text-white" >
+          {/* Sorry but nothing match 🙁 recheck movie name again */}
         </span>
       )}
     </div>
