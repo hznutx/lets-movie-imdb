@@ -9,7 +9,7 @@ const MoviePoster = ({ from }: img) => {
       width={390}
       height={200}
       loading="lazy"
-      className="rounded-t-3xl object-top grid h-80 object-cover"
+      className="w-full max-w-[390px] rounded-t-3xl object-top grid h-80 object-cover"
       alt="movie-poster"
     />
   );
