@@ -57,12 +57,12 @@ const PageLayout = ({ moviecard }: { moviecard: any }) => {
       </div>
       <div className="w-full flex rounded-3xl">
         {activeTab === Tab.grid ? (
-          <div role="tab" aria-labelledby="profile-tab" className="max-w-6xl">
-            <div className="grid grid-cols-3 w-full gap-12 items-center">
+        
+            <div aria-labelledby="profile-tab" role="tab" className="px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-12 items-center">
               {moviecard.map((movie: any, i: any) => (
                 <MovieCard movie={movie} key={i} />
               ))}
-            </div>
+          
           </div>
         ) : activeTab === Tab.card ? (
           <div className="group overflow-hidden flex items-center  h-[800px] max-w-6xl">
@@ -73,7 +73,7 @@ const PageLayout = ({ moviecard }: { moviecard: any }) => {
               }}
               navigation={true}
               modules={[Pagination, Navigation]}
-              className="max-w-7xl flex items-center"
+              className="min-w-[375px] max-w-7xl flex items-center"
             >
               {moviecard.map((movie: any, i: any) => (
                 <SwiperSlide
