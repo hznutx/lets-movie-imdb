@@ -5,7 +5,7 @@ import { IconImg, MoviePoster } from "./ImageSet";
 
 const MovieCard = ({ movie }: { movie: MoviesIMDB }) => {
   return (
-    <div className="card grid rounded-3xl max-w-xs sm:max-w-[390px] shadow-sm bg-slate-100  flex-col">
+    <div className="card grid rounded-3xl min-w-[375px] sm:w-[390px] shadow-sm bg-slate-100  flex-col">
       <MoviePoster from={movie.images[2][1]} />
       <div className="p-6 grid group">
         <Link
