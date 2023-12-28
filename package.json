@@ -16,7 +16,9 @@
     "pnpm": "^8.10.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "swiper": "^11.0.3"
+    "react-icons": "^4.12.0",
+    "swiper": "^11.0.3",
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.10",

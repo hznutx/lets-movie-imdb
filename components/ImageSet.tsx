@@ -6,10 +6,10 @@ const MoviePoster = ({ from }: img) => {
   return (
     <Image
       src={from}
-      width={390}
+      width={370}
       height={200}
       loading="lazy"
-      className="w-full max-w-[390px] rounded-t-3xl object-top grid h-80 object-cover"
+      className="w-full max-w-[370px] rounded-t-3xl object-top grid h-72 object-cover"
       alt="movie-poster"
     />
   );

@@ -11,6 +11,7 @@ import { HEADER_TOPMOVIE } from "@/constants";
 import { SearchFilter } from "./SearchFilter";
 import PageLayout from "./Pagination";
 import Pagination from "./Pagination";
+import { useDebouncedCallback } from "use-debounce";
 
 const TopRankMovies = () => {
   const [movies, setMovies] = useState<MoviesIMDB[]>([]);
@@ -49,7 +50,10 @@ const TopRankMovies = () => {
   }, []);
 
   const searchMovies = movies.filter((movie) => {
-    return movie.title.includes(searchInput);
+    return movie.title
+      .toLowerCase()
+      .replace(/\s+/g, "")
+      .includes(searchInput.toLowerCase().replace(/\s+/g, ""));
   });
 
   const isDataEmpty =
@@ -57,7 +61,7 @@ const TopRankMovies = () => {
 const NumResultMovies = searchMovies.length;
 
   return (
-    <div className="flex-col py-8 gap-y-12 flex items-center">
+    <div className="flex-col py-8 gap-y-12 flex w-full items-center">
       <SearchBar
         keyword={searchInput}
         onClick={handlePopup}
@@ -72,11 +76,11 @@ const NumResultMovies = searchMovies.length;
               <span>{HEADER_TOPMOVIE}</span>
             )}
           </p>
-            <Pagination moviecard={searchMovies}/>
-          </div>
+          <Pagination moviecard={searchMovies} />
+        </div>
       ) : (
-        <span className="w-full text-center text-lg text-white" >
-          {/* Sorry but nothing match 🙁 recheck movie name again */}
+        <span className="w-full text-center text-lg text-white">
+          Sorry but nothing match 🙁 recheck movie name again
         </span>
       )}
     </div>

@@ -3,74 +3,97 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { useState } from "react";
+import { HiViewBoards, HiViewGrid, HiViewList } from "react-icons/hi";
 import { MovieCard } from ".";
-import { IconImg } from "./ImageSet";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useReducer } from "react";
 
 const enum Tab {
   grid = "grid",
   card = "card",
   list = "list",
-  activeColor = "text-white bg-indigo-500",
-  noClickColor = "text-gray-400 bg-blue-900",
-  gridlayout = "/grid.svg",
-  cardlayout = "/gridcard.svg",
-  listlayout = "/gridlist.svg",
+  activeColor = "p-4 rounded-xl text-white bg-indigo-500",
+  noClickColor = "p-4 rounded-xl text-gray-400 bg-blue-900",
 }
 
-const PageLayout = ({ moviecard }: { moviecard: any }) => {
-  const [activeTab, setActiveTab] = useState("grid");
+const actionTypes = {
+  Grid: "Grid",
+  List: "List",
+  Card: "Card",
+};
 
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
-  };
+export const reducer = (tab: any, action: any) => {
+  switch (action.type) {
+    case actionTypes.Grid:
+      return { role: Tab.grid, active: true };
+    case actionTypes.List:
+      return { role: Tab.list, active: true };
+    case actionTypes.Card:
+      return { role: Tab.card, active: true };
+    default:
+      return tab;
+  }
+};
+
+const initialtab = { role: Tab.grid, active: false };
+
+const PageLayout = ({ moviecard }: { moviecard: any }) => {
+  const [tab, dispatch] = useReducer(reducer, initialtab);
 
   return (
-    <div className="flex-col flex">
-      <div className="inline-flex gap-4 ">
+    <div className="container">
+      <div className="flex gap-3">
         <button
-          className={`flex mb-10 p-4 rounded-2xl text-center cursor-pointer ${
-            activeTab === "grid" ? Tab.activeColor : Tab.noClickColor
-          }`}
-          onClick={() => handleTabClick("grid")}
+          onClick={() => dispatch({ type: actionTypes.Grid })}
+          className={tab.role === Tab.grid ? Tab.activeColor : Tab.noClickColor}
         >
-          <IconImg from={Tab.gridlayout} size={24} />
-        </button>{" "}
+          <HiViewGrid />
+        </button>
         <button
-          className={`flex mb-10 p-4 rounded-2xl text-center cursor-pointer ${
-            activeTab === "card" ? Tab.activeColor : Tab.noClickColor
-          }`}
-          onClick={() => handleTabClick("card")}
+          onClick={() => dispatch({ type: actionTypes.List })}
+          className={tab.role === Tab.list ? Tab.activeColor : Tab.noClickColor}
         >
-          <IconImg from={Tab.cardlayout} size={24} />
-        </button>{" "}
+          <HiViewList />
+        </button>
         <button
-          className={`flex mb-10 p-4 rounded-2xl text-center cursor-pointer ${
-            activeTab === "list" ? Tab.activeColor : Tab.noClickColor
-          }`}
-          onClick={() => handleTabClick("list")}
+          onClick={() => dispatch({ type: actionTypes.Card })}
+          className={tab.role === Tab.card ? Tab.activeColor : Tab.noClickColor}
         >
-          <IconImg from={Tab.listlayout} size={24} />
+          <HiViewBoards />
         </button>
       </div>
-      <div className="w-full flex rounded-3xl">
-        {activeTab === Tab.grid ? (
-        
-            <div aria-labelledby="profile-tab" role="tab" className="px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-12 items-center">
+      <div className="max-w-7xl">
+        {tab.role === Tab.grid && (
+          <div
+            role={Tab.grid}
+            aria-labelledby="profile-tab"
+            className="py-10 w-full grid gap-y-10 grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+          >
+            {moviecard.map((movie: any, i: any) => (
+              <MovieCard key={i} movie={movie} />
+            ))}
+          </div>
+        )}
+
+        {tab.role === Tab.list && (
+          <div role={Tab.list} aria-labelledby="profile-tab" className="w-full">
+            <div className="flex-col flex gap-12 overflow-x-hidden px-96 max-h-[650px] w-full items-center">
               {moviecard.map((movie: any, i: any) => (
                 <MovieCard movie={movie} key={i} />
               ))}
-          
+            </div>
           </div>
-        ) : activeTab === Tab.card ? (
-          <div className="group overflow-hidden flex items-center  h-[800px] max-w-6xl">
+        )}
+
+        {tab.role === Tab.card && (
+          <div
+            role={Tab.grid}
+            className="group overflow-hidden flex items-center  h-[800px] max-w-6xl"
+          >
             <Swiper
               slidesPerView={1}
-              pagination={{clickable:true,
-                type: "custom",
-              }}
+              pagination={{ clickable: true, type: "custom" }}
               navigation={true}
               modules={[Pagination, Navigation]}
               className="min-w-[375px] max-w-7xl flex items-center"
@@ -84,17 +107,8 @@ const PageLayout = ({ moviecard }: { moviecard: any }) => {
                 </SwiperSlide>
               ))}
             </Swiper>
-           
           </div>
-        ) : activeTab === Tab.list ? (
-          <div role="tab" aria-labelledby="profile-tab" className="w-full">
-            <div className="flex-col flex gap-12 overflow-x-hidden px-96 max-h-[650px] w-full items-center">
-              {moviecard.map((movie: any, i: any) => (
-                <MovieCard movie={movie} key={i} />
-              ))}
-            </div>
-          </div>
-        ) : null}
+        )}
       </div>
     </div>
   );

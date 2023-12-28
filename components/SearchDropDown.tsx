@@ -5,7 +5,7 @@ const DropdownButton = ({ data }: { data?: []}) => {
   const [selected, setSelected] = useState("");
 
   return (
-    <div className="rounded-3xl p-3 bg-[#0d1829]">
+    <div className="rounded-3xl p-2 bg-[#0d1829]">
       <select
         value={selected}
         onChange={(e) => setSelected(e.target.value)}
