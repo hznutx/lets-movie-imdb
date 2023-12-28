@@ -63,7 +63,7 @@ const PageLayout = ({ moviecard }: { moviecard: any }) => {
           <HiViewBoards />
         </button>
       </div>
-      <div className="max-w-7xl">
+      <div className="relative">
         {tab.role === Tab.grid && (
           <div
             role={Tab.grid}
@@ -77,8 +77,8 @@ const PageLayout = ({ moviecard }: { moviecard: any }) => {
         )}
 
         {tab.role === Tab.list && (
-          <div role={Tab.list} aria-labelledby="profile-tab" className="w-full">
-            <div className="flex-col flex gap-12 overflow-x-hidden px-96 max-h-[650px] w-full items-center">
+          <div role={Tab.list} aria-labelledby="profile-tab" className="flex items-center">
+            <div className="flex flex-col gap-12 overflow-x-hidden max-h-[650px] my-10 w-full justify-center items-center">
               {moviecard.map((movie: any, i: any) => (
                 <MovieCard movie={movie} key={i} />
               ))}

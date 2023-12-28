@@ -7,7 +7,7 @@ import {
   fetchAndSaveData,
   getStoredData,
 } from "@/utils";
-import { HEADER_TOPMOVIE } from "@/constants";
+import { HEADER_TOPMOVIE, genre } from "@/constants";
 import { SearchFilter } from "./SearchFilter";
 import PageLayout from "./Pagination";
 import Pagination from "./Pagination";
@@ -56,9 +56,15 @@ const TopRankMovies = () => {
       .includes(searchInput.toLowerCase().replace(/\s+/g, ""));
   });
 
+  const filterMovies = movies.filter((movie) => {
+    return movie.genre?.filter((category) => {
+      category
+    })
+  });
+
   const isDataEmpty =
     !Array.isArray(searchMovies) || searchMovies.length < 1 || !searchMovies;
-const NumResultMovies = searchMovies.length;
+  const NumResultMovies = searchMovies.length;
 
   return (
     <div className="flex-col py-8 gap-y-12 flex w-full items-center">
@@ -66,6 +72,7 @@ const NumResultMovies = searchMovies.length;
         keyword={searchInput}
         onClick={handlePopup}
         onChange={setsearchInput}
+        dataFilter={filterMovies}
       />
       {!isDataEmpty ? (
         <div className="gap-y-12 flex items-center flex-col w-full">

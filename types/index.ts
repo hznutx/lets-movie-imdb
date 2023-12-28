@@ -19,8 +19,8 @@ export interface MoviesIMDB {
 export interface FilterSearchInput {
   onClick?: MouseEventHandler<HTMLImageElement>;
   onChange?: any;
-  data?: string[];
   keyword?: string | number | readonly string[] | undefined;
+  dataFilter: MoviesIMDB[];
 }
 
 export type DropDownList = {

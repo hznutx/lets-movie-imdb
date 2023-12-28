@@ -9,8 +9,8 @@ export const sorting = [
   "Top 20",
   "Name A-Z",
 ];
-export const genre = ["Author","Actor"];
-export const type = [
+export const attend = ["Author","Actor"];
+export const genre = [
   "Select Movie type",
   "Action",
   "Adventure",

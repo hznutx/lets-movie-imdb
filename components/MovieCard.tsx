@@ -22,6 +22,7 @@ const MovieCard = ({ movie }: { movie: MoviesIMDB }) => {
             {movie.description}
           </span>
         </div>
+
         <div className=" grid-cols-2 flex group justify-between">
           <div className="font-black flex flex-col">
             <span className="text-yellow-500 text-sm">IMDB SCORE</span>
@@ -35,6 +36,16 @@ const MovieCard = ({ movie }: { movie: MoviesIMDB }) => {
             <span className="text-xl  font-bold  gap-x-2 text-slate-300">
               #{movie.rank}
             </span>
+          <div className="flex gap-1">
+            {movie?.genre?.map((type, i) => (
+              <span
+                className="rounded-lg px-2 py-1 text-xs bg-slate-300"
+                key={i}
+              >
+                {type}
+              </span>
+            ))}
+          </div>
           </div>
         </div>
       </div>

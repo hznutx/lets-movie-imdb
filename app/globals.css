@@ -42,5 +42,6 @@
 select {
   background-color: #0d1829;
   color: #7a7a7a;
+  max-height: "150px";
 }
 

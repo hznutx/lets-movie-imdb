@@ -5,7 +5,7 @@ import { IconImg } from "./ImageSet";
 import { useState } from "react";
 import { SearchFilter } from "./SearchFilter";
 
-const SearchBar = ({ onClick, keyword, onChange }: FilterSearchInput) => {
+const SearchBar = ({ dataFilter, keyword, onChange }: FilterSearchInput) => {
   const [openDropDown, setOpenDropDown] = useState(false);
 
   const handlePopup = () => {
@@ -32,7 +32,7 @@ const SearchBar = ({ onClick, keyword, onChange }: FilterSearchInput) => {
           <IconImg from={icon.search} size={24} />
         </button>
       </div>
-      {openDropDown && <SearchFilter />}
+      {openDropDown && <SearchFilter movietype={dataFilter} />}
     </form>
   );
 };
